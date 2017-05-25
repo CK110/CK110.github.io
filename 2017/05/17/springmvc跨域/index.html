@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sanshine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#SpringMVC项目支持CORS的几种方式 Spring Framework 4.2 GA为开箱即用的CORS提供了一流的支持，为您提供了比典型的基于过滤器的解决方案更简单，更强大的配置方式。 Controller方法上增加CORS配置123456789101112131415@RestController@RequestMapping(&quot;/account&quot;)public class Acco">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sanshine">
+<meta property="og:url" content="http://CK110.github.io/2017/05/17/springmvc跨域/index.html">
+<meta property="og:site_name" content="Sanshine">
+<meta property="og:description" content="#SpringMVC项目支持CORS的几种方式 Spring Framework 4.2 GA为开箱即用的CORS提供了一流的支持，为您提供了比典型的基于过滤器的解决方案更简单，更强大的配置方式。 Controller方法上增加CORS配置123456789101112131415@RestController@RequestMapping(&quot;/account&quot;)public class Acco">
+<meta property="og:updated_time" content="2017-05-17T09:42:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sanshine">
+<meta name="twitter:description" content="#SpringMVC项目支持CORS的几种方式 Spring Framework 4.2 GA为开箱即用的CORS提供了一流的支持，为您提供了比典型的基于过滤器的解决方案更简单，更强大的配置方式。 Controller方法上增加CORS配置123456789101112131415@RestController@RequestMapping(&quot;/account&quot;)public class Acco">
+  
+    <link rel="alternate" href="/atom.xml" title="Sanshine" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Sanshine</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://CK110.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-springmvc跨域" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/17/springmvc跨域/" class="article-date">
+  <time datetime="2017-05-17T09:12:39.000Z" itemprop="datePublished">2017-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#SpringMVC项目支持CORS的几种方式</p>
+<p>Spring Framework 4.2 GA为开箱即用的CORS提供了一流的支持，为您提供了比典型的基于过滤器的解决方案更简单，更强大的配置方式。</p>
+<h2 id="Controller方法上增加CORS配置"><a href="#Controller方法上增加CORS配置" class="headerlink" title="Controller方法上增加CORS配置"></a>Controller方法上增加CORS配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/account"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountController</span> </span>&#123;</div><div class="line"></div><div class="line">	+ <span class="meta">@CrossOrigin</span></div><div class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Account <span class="title">retrieve</span><span class="params">(@PathVariable Long id)</span> </span>&#123;</div><div class="line">		<span class="comment">// ...</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@RequestMapping</span>(method = RequestMethod.DELETE, value = <span class="string">"/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(@PathVariable Long id)</span> </span>&#123;</div><div class="line">		<span class="comment">// ...</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在controller上配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">+ <span class="meta">@CrossOrigin</span>(origins = <span class="string">"http://domain2.com"</span>, maxAge = <span class="number">3600</span>)</div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/account"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountController</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Account <span class="title">retrieve</span><span class="params">(@PathVariable Long id)</span> </span>&#123;</div><div class="line">		<span class="comment">// ...</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@RequestMapping</span>(method = RequestMethod.DELETE, value = <span class="string">"/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(@PathVariable Long id)</span> </span>&#123;</div><div class="line">		<span class="comment">// ...</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>或者混合配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">+ @CrossOrigin(maxAge = 3600)</div><div class="line">@RestController</div><div class="line">@RequestMapping(&quot;/account&quot;)</div><div class="line">public class AccountController &#123;</div><div class="line"></div><div class="line">	+ @CrossOrigin(origins = &quot;http://domain2.com&quot;)</div><div class="line">	@RequestMapping(&quot;/&#123;id&#125;&quot;)</div><div class="line">	public Account retrieve(@PathVariable Long id) &#123;</div><div class="line">		// ...</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@RequestMapping(method = RequestMethod.DELETE, value = &quot;/&#123;id&#125;&quot;)</div><div class="line">	public void remove(@PathVariable Long id) &#123;</div><div class="line">		// ...</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><h3 id="使用Java配置"><a href="#使用Java配置" class="headerlink" title="使用Java配置"></a>使用Java配置</h3><p>整个应用都支持CORS</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">		registry.addMapping(<span class="string">"/**"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>更详细的配置，具体到某个API路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">		registry.addMapping(<span class="string">"/api/**"</span>)</div><div class="line">			.allowedOrigins(<span class="string">"http://domain2.com"</span>)</div><div class="line">			.allowedMethods(<span class="string">"PUT"</span>, <span class="string">"DELETE"</span>)</div><div class="line">			.allowedHeaders(<span class="string">"header1"</span>, <span class="string">"header2"</span>, <span class="string">"header3"</span>)</div><div class="line">			.exposedHeaders(<span class="string">"header1"</span>, <span class="string">"header2"</span>)</div><div class="line">			.allowCredentials(<span class="keyword">false</span>).maxAge(<span class="number">3600</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="使用XML配置"><a href="#使用XML配置" class="headerlink" title="使用XML配置"></a>使用XML配置</h3><p>整个应用都支持CORS</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mvc:cors</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/**"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mvc:cors</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>更详细的配置，具体到某个API路径</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mvc:cors</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/api/**"</span></span></div><div class="line">		<span class="attr">allowed-origins</span>=<span class="string">"http://domain1.com, http://domain2.com"</span></div><div class="line">		<span class="attr">allowed-methods</span>=<span class="string">"GET, PUT"</span></div><div class="line">		<span class="attr">allowed-headers</span>=<span class="string">"header1, header2, header3"</span></div><div class="line">		<span class="attr">exposed-headers</span>=<span class="string">"header1, header2"</span> <span class="attr">allow-credentials</span>=<span class="string">"false"</span></div><div class="line">		<span class="attr">max-age</span>=<span class="string">"123"</span> /&gt;</div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/resources/**"</span></span></div><div class="line">		<span class="attr">allowed-origins</span>=<span class="string">"http://domain1.com"</span> /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">mvc:cors</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>##Spring Boot的配置方式<br>Spring Boot 1.3 版本支持CORS</p>
+<p>在SpringBoot应用程序中使用带有@CrossOrigin注解的 controller方法，不需要任何特定的配置。</p>
+<h3 id="全局配置的方式"><a href="#全局配置的方式" class="headerlink" title="全局配置的方式:"></a>全局配置的方式:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> WebMvcConfigurer <span class="title">corsConfigurer</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WebMvcConfigurerAdapter() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">                registry.addMapping(<span class="string">"/api/**"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Filter-based-CORS-support"><a href="#Filter-based-CORS-support" class="headerlink" title="Filter based CORS support"></a>Filter based CORS support</h3><p>为了支持具有基于过滤器的安全框架（如Spring Security）的CORS，或者与其他不支持本机CORS的项目（如Spring Data REST）一起，我们还提供了一个CorsFilter。在这种情况下，不用使用@CrossOrigin或WebMvcConfigurer＃addCorsMappings（CorsRegistry），您可以在Spring Boot应用程序中声明如下所示的过滤器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Bean</span></div><div class="line">	<span class="function"><span class="keyword">public</span> FilterRegistrationBean <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;</div><div class="line">		UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</div><div class="line">		CorsConfiguration config = <span class="keyword">new</span> CorsConfiguration();</div><div class="line">		config.setAllowCredentials(<span class="keyword">true</span>);</div><div class="line">		config.addAllowedOrigin(<span class="string">"http://domain1.com"</span>);</div><div class="line">		config.addAllowedHeader(<span class="string">"*"</span>);</div><div class="line">		config.addAllowedMethod(<span class="string">"*"</span>);</div><div class="line">		source.registerCorsConfiguration(<span class="string">"/**"</span>, config);</div><div class="line">		FilterRegistrationBean bean = <span class="keyword">new</span> FilterRegistrationBean(<span class="keyword">new</span> CorsFilter(source));</div><div class="line">		bean.setOrder(<span class="number">0</span>);</div><div class="line">		<span class="keyword">return</span> bean;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://spring.io/blog/2015/06/08/cors-support-in-spring-framework" target="_blank" rel="external">CORS support in Spring Framework</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/05/17/springmvc跨域/" data-id="cj34i8xqv000tdnsewlk5c3k6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/19/深入浅出nodejs/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/07/NgValidateTooltip/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2-Zone-js/">Angular2 Zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-设计模式/">Java 设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2-zone-js/">angular2 zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular2-Zone-js/" style="font-size: 10px;">Angular2 Zone.js</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a> <a href="/tags/angular2/" style="font-size: 20px;">angular2</a> <a href="/tags/angular2-zone-js/" style="font-size: 10px;">angular2 zone.js</a> <a href="/tags/css/" style="font-size: 10px;">css</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/19/深入浅出nodejs/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/17/springmvc跨域/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/07/NgValidateTooltip/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/前端开发平台之使用说明/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/Angular DI 总结/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 sanshine<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -3,14 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>归档: 2017 | Sanshine</title>
+  <title>Sanshine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="实际上并不需要，ComponentFactory 自己就具备了组件实例化的职能：  ComponentFactory.create 得到组件实例，还是的需要一个ViewContainerRef , 来插入 生成组件的hostView吧。还有就是第一个参数 injector，需不需要我通过参数来传递。这个injector 应该怎么获取，假设说所创建的组件并不需要自己的单独适用的providers">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Sanshine">
-<meta property="og:url" content="http://CK110.github.io/archives/2017/index.html">
+<meta property="og:url" content="http://CK110.github.io/2017/03/08/动态创建组件问题/index.html">
 <meta property="og:site_name" content="Sanshine">
+<meta property="og:description" content="实际上并不需要，ComponentFactory 自己就具备了组件实例化的职能：  ComponentFactory.create 得到组件实例，还是的需要一个ViewContainerRef , 来插入 生成组件的hostView吧。还有就是第一个参数 injector，需不需要我通过参数来传递。这个injector 应该怎么获取，假设说所创建的组件并不需要自己的单独适用的providers">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fdfkk2mkuxj31b40d40xc.jpg">
+<meta property="og:updated_time" content="2017-03-08T09:42:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sanshine">
+<meta name="twitter:description" content="实际上并不需要，ComponentFactory 自己就具备了组件实例化的职能：  ComponentFactory.create 得到组件实例，还是的需要一个ViewContainerRef , 来插入 生成组件的hostView吧。还有就是第一个参数 injector，需不需要我通过参数来传递。这个injector 应该怎么获取，假设说所创建的组件并不需要自己的单独适用的providers">
+<meta name="twitter:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fdfkk2mkuxj31b40d40xc.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Sanshine" type="application/atom+xml">
   
@@ -59,155 +65,64 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/19/深入浅出nodejs/" class="archive-article-date">
-  <time datetime="2017-05-19T06:05:21.000Z" itemprop="datePublished">5月 19</time>
+        <section id="main"><article id="post-动态创建组件问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/08/动态创建组件问题/" class="article-date">
+  <time datetime="2017-03-08T09:42:03.000Z" itemprop="datePublished">2017-03-08</time>
 </a>
-      
-    </header>
+    
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/17/springmvc跨域/" class="archive-article-date">
-  <time datetime="2017-05-17T09:12:39.000Z" itemprop="datePublished">5月 17</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/07/NgValidateTooltip/" class="archive-article-date">
-  <time datetime="2017-05-07T07:54:49.000Z" itemprop="datePublished">5月 7</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/18/前端开发平台之使用说明/" class="archive-article-date">
-  <time datetime="2017-04-18T05:51:43.000Z" itemprop="datePublished">4月 18</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/14/Angular DI 总结/" class="archive-article-date">
-  <time datetime="2017-04-14T06:36:04.000Z" itemprop="datePublished">4月 14</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/13/需求/" class="archive-article-date">
-  <time datetime="2017-04-13T02:07:43.000Z" itemprop="datePublished">4月 13</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/20/box-shadow的妙用/" class="archive-article-date">
-  <time datetime="2017-03-20T08:21:49.000Z" itemprop="datePublished">3月 20</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/15/vue and angular 类似概念/" class="archive-article-date">
-  <time datetime="2017-03-15T07:11:16.000Z" itemprop="datePublished">3月 15</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/13/JS 数组常用操作/" class="archive-article-date">
-  <time datetime="2017-03-13T06:48:02.000Z" itemprop="datePublished">3月 13</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/12/div实现网易云音乐评论的背景框/" class="archive-article-date">
-  <time datetime="2017-03-12T07:26:34.000Z" itemprop="datePublished">3月 12</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+        <blockquote>
+<p>实际上并不需要，ComponentFactory 自己就具备了组件实例化的职能：</p>
+</blockquote>
+<p>ComponentFactory.create 得到组件实例，还是的需要一个<code>ViewContainerRef</code> , 来插入 生成组件的hostView吧。还有就是第一个参数 injector，需不需要我通过参数来传递。这个injector 应该怎么获取，假设说所创建的组件并不需要自己的单独适用的providers</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class ComponentFactory &#123;</div><div class="line">  create(injector: Injector, projectableNodes?: any[][], rootSelectorOrNode?: string|any) : ComponentRef&lt;C&gt; &#123; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果需要在非引用现有部分实例化组件（比如 Modal），直接指定 selector 或者 DOM node 即可，并不需要藉由一个已有的 ViewContainerRef 来实现。</p>
+</blockquote>
+<p>这句话不是理解，对应的代码应该是什么样的？</p>
+<blockquote>
+<p>目前我是这样来创建一个弹框的，请问如果我只想传递组件的初始化值（不传递ViewContainerRef），我这个方法可以怎么改？</p>
+</blockquote>
+<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fdfkk2mkuxj31b40d40xc.jpg" alt=""></p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/08/动态创建组件问题/" data-id="cj34i8xr3000ydnse3cznwhvu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/12/div实现网易云音乐评论的背景框/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/08/Angular2中给宿主元素设置样式的2种方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
 
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="extend next" rel="next" href="/archives/2017/page/2/">__('next') &raquo;</a>
-  </nav>
+  
+</article>
+
 </section>
         
           <aside id="sidebar">

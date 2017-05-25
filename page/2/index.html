@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sanshine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Sanshine">
+<meta property="og:url" content="http://CK110.github.io/page/2/index.html">
+<meta property="og:site_name" content="Sanshine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sanshine">
+  
+    <link rel="alternate" href="/atom.xml" title="Sanshine" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Sanshine</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://CK110.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-动态创建组件问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/08/动态创建组件问题/" class="article-date">
+  <time datetime="2017-03-08T09:42:03.000Z" itemprop="datePublished">2017-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>实际上并不需要，ComponentFactory 自己就具备了组件实例化的职能：</p>
+</blockquote>
+<p>ComponentFactory.create 得到组件实例，还是的需要一个<code>ViewContainerRef</code> , 来插入 生成组件的hostView吧。还有就是第一个参数 injector，需不需要我通过参数来传递。这个injector 应该怎么获取，假设说所创建的组件并不需要自己的单独适用的providers</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class ComponentFactory &#123;</div><div class="line">  create(injector: Injector, projectableNodes?: any[][], rootSelectorOrNode?: string|any) : ComponentRef&lt;C&gt; &#123; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果需要在非引用现有部分实例化组件（比如 Modal），直接指定 selector 或者 DOM node 即可，并不需要藉由一个已有的 ViewContainerRef 来实现。</p>
+</blockquote>
+<p>这句话不是理解，对应的代码应该是什么样的？</p>
+<blockquote>
+<p>目前我是这样来创建一个弹框的，请问如果我只想传递组件的初始化值（不传递ViewContainerRef），我这个方法可以怎么改？</p>
+</blockquote>
+<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fdfkk2mkuxj31b40d40xc.jpg" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/08/动态创建组件问题/" data-id="cj34i8xr3000ydnse3cznwhvu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Angular2中给宿主元素设置样式的2种方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/08/Angular2中给宿主元素设置样式的2种方式/" class="article-date">
+  <time datetime="2017-03-08T05:43:59.000Z" itemprop="datePublished">2017-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Angular2中给宿主元素设置样式的2种方式</p>
+<blockquote>
+<p>primeng开源组件的 host element 基本不会有样式设置，但是最近有个需求，能够定义全局css来设置一些表单控件的宽度。</p>
+</blockquote>
+<h2 id="常规"><a href="#常规" class="headerlink" title="常规"></a>常规</h2><p>不在host elemnet上增加样式</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'my-comp'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line">      &lt;div style="width: 100%;height: 30px;border: 1px solid red"&gt;</div><div class="line">               </div><div class="line">      &lt;/div&gt;</div><div class="line">      </div><div class="line">    `</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>浏览器渲染的结果:<br><img src="https://ww1.sinaimg.cn/large/006tNc79gy1fdff0nleeej31kw0nd46i.jpg" alt="图片1"></p>
+<h2 id="通过style-host-的方式"><a href="#通过style-host-的方式" class="headerlink" title="通过style :host 的方式"></a>通过style :host 的方式</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'my-comp'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line">      &lt;div style="width: 100%;height: 30px;border: 1px solid red"&gt;</div><div class="line">        </div><div class="line">          </div><div class="line">      &lt;/div&gt;</div><div class="line">      </div><div class="line">    `,</div><div class="line">    styles:[<span class="string">`</span></div><div class="line">        :host &#123;</div><div class="line">            display:inline-block; </div><div class="line">            min-width: 50px;</div><div class="line">        &#125;</div><div class="line">     </div><div class="line">    `]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>host element 上的样式应用</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fdffx0c33cj31fq0tkn5f.jpg" alt=""></p>
+<h2 id="使用host-属性"><a href="#使用host-属性" class="headerlink" title="使用host 属性"></a>使用host 属性</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.ui-host</span> &#123;</div><div class="line">  <span class="attribute">display</span>:inline-block;</div><div class="line">  <span class="attribute">min-width</span>:<span class="number">240px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'my-comp'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line">      &lt;div style="width: 100%;height: 30px;border: 1px solid red"&gt;</div><div class="line">        </div><div class="line">          </div><div class="line">      &lt;/div&gt;</div><div class="line">      </div><div class="line">    `,</div><div class="line">  host: &#123;</div><div class="line">    <span class="string">'[class.ui-host]'</span>: <span class="string">'true'</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>会在host element 上设置样式类</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1fdfg8lza5fj31ga0t2jy5.jpg" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>可能大部分人是不需要在host elemen 上设置样式的。不过自己在写组件时，例如: 一个 input 框，你可能提供了属性来设置width，但是大部分情况下是作用域 template 中的。</p>
+<p>实际项目中，我需要定义个全局的样式，设置 input 框的宽度，我可能更倾向于通过标签名来设置宽度。</p>
+<p>按照上面例子，修改元素的宽度，我就可以这样定义全局css:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">my-comp</span>&#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">400px</span>   // 由于上面是min-with，所以会有效</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/08/Angular2中给宿主元素设置样式的2种方式/" data-id="cj34i8xpq0001dnse5i45fhgy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JavaScript 数组方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/02/JavaScript 数组方法/" class="article-date">
+  <time datetime="2017-03-02T06:01:15.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript-数组方法"><a href="#JavaScript-数组方法" class="headerlink" title="JavaScript 数组方法"></a>JavaScript 数组方法</h1><h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><p>对数组中的所有元素调用指定的回调函数。该回调函数的返回值为累积结果，并且此返回值在下一次调用该回调函数时作为参数提供。（相当于累加）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].reduce(<span class="function">(<span class="params">p,c,x,a</span>)=&gt;</span> p+c)</div><div class="line"><span class="comment">// 10 </span></div><div class="line"><span class="comment">// 解释：相当于: ((1+2)+3)+4</span></div><div class="line"></div><div class="line"></div><div class="line">[<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>].reduce(<span class="function">(<span class="params">p,c,x,a</span>)=&gt;</span> p+c)</div><div class="line"><span class="comment">// "1234"</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/02/JavaScript 数组方法/" data-id="cj34i8xq50008dnseluxz177u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Rxjs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/02/Rxjs/" class="article-date">
+  <time datetime="2017-03-02T05:40:33.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Rxjs"><a href="#Rxjs" class="headerlink" title="Rxjs"></a>Rxjs</h1><h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p><code>let subscription = observable.subscribe(observer)</code></p>
+<h2 id="combineLatest"><a href="#combineLatest" class="headerlink" title="combineLatest"></a>combineLatest</h2><p>只要是子流有变化就来一发</p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>两个流：A :每隔4秒发射出一个值， B： 每隔2秒发出一个值 （会有同一时间发出一个值）</p>
+<p>A: —— 0——-1——2——3—–4 <br><br>B: —0–1—2—3–4</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> A = Rx.Observable.interval(<span class="number">4000</span>).take(<span class="number">5</span>);</div><div class="line"><span class="keyword">var</span> B = Rx.Observable.interval(<span class="number">2000</span>).take(<span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log( <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString( ))   <span class="comment">// 开始订阅的时间</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> combined = Rx.Observable</div><div class="line">.combineLatest(A,B)</div><div class="line">.subscribe( <span class="function"><span class="params">x</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log( <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString( ))</div><div class="line">  <span class="built_in">console</span>.log(x)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&quot;2017/3/3 下午3:34:53&quot;</div><div class="line">&quot;2017/3/3 下午3:34:57&quot;  // 4s 过后，A发出值0, B刚好发出 1 ,虽然会出现[0,0],但是这个点的最终结果是[0,1]</div><div class="line">[0, 0]</div><div class="line">&quot;2017/3/3 下午3:34:57&quot;</div><div class="line">[0, 1]</div><div class="line">&quot;2017/3/3 下午3:34:59&quot;</div><div class="line">[0, 2]</div><div class="line">&quot;2017/3/3 下午3:35:01&quot; //  注意这边，A 刚好发出 1， B 刚好发出3 ，虽然会出现[1,2], 但是这个点的最终事件是 [1,3]</div><div class="line">[1, 2]</div><div class="line">&quot;2017/3/3 下午3:35:01&quot;</div><div class="line">[1, 3]</div><div class="line">&quot;2017/3/3 下午3:35:03&quot;</div><div class="line">[1, 4]</div><div class="line">&quot;2017/3/3 下午3:35:05&quot;</div><div class="line">[2, 4]</div><div class="line">&quot;2017/3/3 下午3:35:09&quot;</div><div class="line">[3, 4]</div><div class="line">&quot;2017/3/3 下午3:35:13&quot;</div><div class="line">[4, 4]</div></pre></td></tr></table></figure></p>
+<h2 id="observer-next"><a href="#observer-next" class="headerlink" title="observer.next()"></a>observer.next()</h2><p>.next() 相当于function 函数中的return，区别是 function中只能返回一个return，而可观察对象却可以有多个 .next()</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = Rx.Observable.create(<span class="function"><span class="keyword">function</span> (<span class="params">observer</span>) </span>&#123;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'Hello'</span>);</div><div class="line">observer.next(<span class="number">42</span>);</div><div class="line">observer.next(<span class="number">100</span>); <span class="comment">// "return" another value</span></div><div class="line">observer.next(<span class="number">200</span>); <span class="comment">// "return" yet another</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'before'</span>);</div><div class="line">foo.subscribe(<span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</div><div class="line"><span class="built_in">console</span>.log(x);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'after'</span>);</div><div class="line"></div><div class="line">同步输出:</div><div class="line">	<span class="string">"before"</span></div><div class="line">	<span class="string">"Hello"</span></div><div class="line">	<span class="number">42</span></div><div class="line">	<span class="number">100</span></div><div class="line">	<span class="number">200</span></div><div class="line">	<span class="string">"after"</span></div></pre></td></tr></table></figure>
+<ul>
+<li>fun.call()意味着同步的给我一个值</li>
+<li>observable.subscribe()意味着给我任意多个值，同步也好异步也罢。</li>
+</ul>
+<h2 id="Subject"><a href="#Subject" class="headerlink" title="Subject"></a>Subject</h2><p>需要现有订阅者，在调用 next() 方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> myObservable = <span class="keyword">new</span> Rx.Subject();</div><div class="line">myObservable.next(<span class="string">'foo'</span>);</div><div class="line">myObservable.subscribe(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value));</div><div class="line"></div><div class="line">无值打印出来</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> myObservable = <span class="keyword">new</span> Rx.Subject();</div><div class="line">myObservable.next(<span class="string">'foo'</span>);</div><div class="line">myObservable.subscribe(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value));</div><div class="line"></div><div class="line"><span class="string">"foo"</span></div></pre></td></tr></table></figure>
+<h2 id="BehaviorSubject"><a href="#BehaviorSubject" class="headerlink" title="BehaviorSubject"></a>BehaviorSubject</h2><p>Subjects的一个变体是BehaviorSubject,其有”当前值”的概念。它储存着要发射给消费者的最新的值。无论何时一个新的观察者订阅它，都会立即接受到这个来自BehaviorSubject的”当前值”。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.BehaviorSubject(<span class="number">0</span>); <span class="comment">// 0 is the initial value</span></div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  <span class="attr">next</span>: <span class="function">(<span class="params">v</span>) =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'observerA: '</span> + v)  <span class="comment">// observerA: 0</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(<span class="number">1</span>); <span class="comment">// observerA: 1   （很好的解释了多播,每执行一次就会唤起所有订阅者，向订阅者推送当前的数据）</span></div><div class="line">subject.next(<span class="number">2</span>); <span class="comment">// observerA: 2</span></div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  <span class="attr">next</span>: <span class="function">(<span class="params">v</span>) =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'observerB: '</span> + v) <span class="comment">// observerB: 2</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(<span class="number">3</span>); <span class="comment">// observerA: 3 observerB: 3</span></div><div class="line"></div><div class="line">observerA: <span class="number">0</span></div><div class="line">observerA: <span class="number">1</span></div><div class="line">observerA: <span class="number">2</span></div><div class="line">observerB: <span class="number">2</span></div><div class="line">observerA: <span class="number">3</span></div><div class="line">observerB: <span class="number">3</span></div></pre></td></tr></table></figure>
+<h2 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h2><blockquote>
+<p>连接多个可观察对象，并顺序发出他们的值，一个可观察对象跟在另一个的后面 。不管你是不是异步</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/02/Rxjs/" data-id="cj34i8xq60009dnse4u6eo8s0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-viewEncapsulation in angular2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/24/viewEncapsulation in angular2/" class="article-date">
+  <time datetime="2017-02-24T05:44:33.000Z" itemprop="datePublished">2017-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Angular2-的-View-Encapsulation（样式封装）"><a href="#Angular2-的-View-Encapsulation（样式封装）" class="headerlink" title="Angular2 的 View Encapsulation（样式封装）"></a>Angular2 的 View Encapsulation（样式封装）</h1><blockquote>
+<p>angular2 版本：2.4.8,<a href="https://github.com/CK110/ng2-viewEncapsulation.git" target="_blank" rel="external">测试代码地址</a></p>
+</blockquote>
+<h2 id="Shadow-Dom"><a href="#Shadow-Dom" class="headerlink" title="Shadow Dom"></a>Shadow Dom</h2><blockquote>
+<p>开始之间，建议先了解下<a href="http://www.ituring.com.cn/article/177461" target="_blank" rel="external">Shadow Dom</a> 方面的知识</p>
+</blockquote>
+<h2 id="View-Encapsulation-的种类"><a href="#View-Encapsulation-的种类" class="headerlink" title="View Encapsulation 的种类"></a>View Encapsulation 的种类</h2><ul>
+<li>ViewEncapsulation.None - 没有Shadow Dom，样式没有封装，全局可以使用。</li>
+<li>ViewEncapsulation.Emulated - angular2的默认值，模仿 Shdaow Dom，通过在标签上增加标识，来固定样式的作用域。</li>
+<li>ViewEncapsulation.Native - 使用原生的Shadow Dom。</li>
+</ul>
+<h2 id="ViewEncapsulation-None"><a href="#ViewEncapsulation-None" class="headerlink" title="ViewEncapsulation.None"></a>ViewEncapsulation.None</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'component-one'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line"></div><div class="line">      &lt;div class="red"&gt;&lt;/div&gt;</div><div class="line">      </div><div class="line">      &lt;br&gt;</div><div class="line">      </div><div class="line">      &lt;div class="green"&gt;&lt;/div&gt;</div><div class="line">      </div><div class="line">      &lt;br&gt;</div><div class="line">      </div><div class="line">      &lt;div class="blue"&gt;&lt;/div&gt;</div><div class="line">    `,</div><div class="line">    styles:[<span class="string">`</span></div><div class="line">        .green&#123;</div><div class="line">          background-color: green;</div><div class="line">          width:20px;</div><div class="line">          height: 20px;</div><div class="line">        &#125;</div><div class="line">    `],</div><div class="line">    encapsulation:ViewEncapsulation.None</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>生成的<code>&lt;head&gt;</code>标签中的<code>&lt;style&gt;</code>中的样式是没有作用域的。和普通在<code>&lt;head&gt;</code>标签中的<code>&lt;style&gt;</code>中引用的标签一样，作用域全局。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fd1iwrsfqjj31kw0saqbv.jpg" alt=""></p>
+<h2 id="ViewEncapsulation-Emulated"><a href="#ViewEncapsulation-Emulated" class="headerlink" title="ViewEncapsulation.Emulated"></a>ViewEncapsulation.Emulated</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  selector: <span class="string">'app-root'</span>,</div><div class="line">  template:<span class="string">`</span></div><div class="line">    app-component</div><div class="line">    &lt;div class="red"&gt;&lt;/div&gt;    </div><div class="line">    &lt;br&gt;   </div><div class="line">    &lt;div class="green"&gt;&lt;/div&gt;   </div><div class="line">    &lt;br&gt;    </div><div class="line">    &lt;div class="blue"&gt;&lt;/div&gt;    </div><div class="line">    &lt;br&gt;</div><div class="line">    &lt;br&gt;</div><div class="line">    component-one</div><div class="line">    &lt;component-one&gt;&lt;/component-one&gt;    </div><div class="line">    component-two</div><div class="line">    &lt;component-two&gt;&lt;/component-two&gt;</div><div class="line">  `,</div><div class="line">  styles:[<span class="string">`</span></div><div class="line">    .red&#123;</div><div class="line">      background-color: red;</div><div class="line">      height: 20px;</div><div class="line">      width: 20px;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  `]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>生成的<code>&lt;head&gt;</code>标签中的<code>&lt;style&gt;</code>中的样式是有作用域的。<code>[ ]</code>方括号内的表明了作用域。这是<a href="http://www.w3school.com.cn/tiy/t.asp?f=css_sel_attribute" target="_blank" rel="external">css选择器</a>的一种。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.red</span><span class="selector-attr">[_ngcontent-fnb-0]</span>&#123;</div><div class="line">  <span class="attribute">background-color</span>: red;</div><div class="line">  <span class="attribute">height</span>: <span class="number">20px</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">20px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fd1ivjwi92j31kw0s6wn2.jpg" alt=""></p>
+<h2 id="ViewEncapsulation-Native"><a href="#ViewEncapsulation-Native" class="headerlink" title="ViewEncapsulation.Native"></a>ViewEncapsulation.Native</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  selector: <span class="string">'component-two'</span>,</div><div class="line">  template: <span class="string">`</span></div><div class="line"></div><div class="line">    &lt;div class="red"&gt;&lt;/div&gt;</div><div class="line">    </div><div class="line">    &lt;br&gt;</div><div class="line">    </div><div class="line">    &lt;div class="green"&gt;&lt;/div&gt;</div><div class="line">    </div><div class="line">    &lt;br&gt;</div><div class="line">    </div><div class="line">    &lt;div class="blue"&gt;&lt;/div&gt;</div><div class="line">    </div><div class="line">    `,</div><div class="line">  styles:[<span class="string">`</span></div><div class="line">      .blue&#123;</div><div class="line">        background-color: blue;</div><div class="line">        width: 20px;</div><div class="line">        height: 20px;</div><div class="line">      &#125;</div><div class="line">  `],</div><div class="line">  encapsulation:ViewEncapsulation.Native</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>不会再<code>&lt;head&gt;</code>标签中的<code>&lt;style&gt;</code>中生成样式,所以也无法作用与其他组件。实际效果着这样的:<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fd1iyzoht0j31kw0s77d6.jpg" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>如果在子组件中使用的css样式不想影响全局，可以不用设置（默认ViewEncapsulation.Emulated）。</li>
+<li>可以在main.ts设置 ViewEncapsulation.None 将引用css设置为影响全局，一般用来设置一个网站的字体整体样式什么的。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/02/24/viewEncapsulation in angular2/" data-id="cj34i8xqw000udnse3dpa84a1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ZONES-IN-ANGULAR" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/12/ZONES-IN-ANGULAR/" class="article-date">
+  <time datetime="2017-01-12T06:09:51.000Z" itemprop="datePublished">2017-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/12/ZONES-IN-ANGULAR/">ZONES IN ANGULAR</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p> 除非特别说明，文章内容的Angular版本 &gt;=2.x<br> 此为翻译文章，查看<a href="http://blog.thoughtram.io/angular/2016/02/01/zones-in-angular-2.html#running-code-outside-angulars-zone" target="_blank" rel="external">原文</a></p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/12/ZONES-IN-ANGULAR/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/01/12/ZONES-IN-ANGULAR/" data-id="cj34i8xql000hdnseopvbs1uy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular2-zone-js/">angular2 zone.js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ElementRef" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/11/ElementRef/" class="article-date">
+  <time datetime="2017-01-11T07:42:40.000Z" itemprop="datePublished">2017-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/11/ElementRef/">ElementRef</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>ElementRef 与 ViewContainerRef</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/11/ElementRef/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/01/11/ElementRef/" data-id="cj34i8xpu0003dnsenw6smic3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular2/">angular2</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-UNDERSTANDING-ZONES" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/11/UNDERSTANDING-ZONES/" class="article-date">
+  <time datetime="2017-01-11T07:39:13.000Z" itemprop="datePublished">2017-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/11/UNDERSTANDING-ZONES/">UNDERSTANDING ZONES</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p> 除非特别说明，文章内容的Angular版本 &gt;=2.x<br> 此为翻译文章，查看<a href="https://blog.thoughtram.io/angular/2016/01/22/understanding-zones.html" target="_blank" rel="external">原文</a></p>
+</blockquote>
+<p>At NG-Conf 2014, <a href="https://twitter.com/briantford" target="_blank" rel="external">Brian</a>gave an excellent <a href="https://www.youtube.com/watch?v=3IqtmUscE_U" target="_blank" rel="external">talk on zones</a> and how they can change the way we deal with asynchronous code. If you haven’t watched this talk yet, give it a shot, it’s just ~15 minutes long. APIs might be different nowadays, but the semantics and underlying concepts are the same. In this article we’d like to dive a bit deeper into how zones work.</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/11/UNDERSTANDING-ZONES/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/01/11/UNDERSTANDING-ZONES/" data-id="cj34i8xq7000cdnsex64h1lo8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular2-Zone-js/">Angular2 Zone.js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="[draft]-angular2App性能调优的4个阶段" class="article article-type-[draft]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/28/angular2App性能调优的4个阶段/" class="article-date">
+  <time datetime="2016-09-28T00:57:30.000Z" itemprop="datePublished">2016-09-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/28/angular2App性能调优的4个阶段/">angular2App性能调优的4个阶段</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://ww1.sinaimg.cn/large/72f96cbagw1f890tacpsmj20k00b90tt.jpg" alt=""></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/09/28/angular2App性能调优的4个阶段/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2016/09/28/angular2App性能调优的4个阶段/" data-id="cj34i8xqq000mdnse61zm9pdp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-angular" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/21/angular/" class="article-date">
+  <time datetime="2016-09-21T12:56:08.000Z" itemprop="datePublished">2016-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/21/angular/">angular</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>瞎记录</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2016/09/21/angular/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2016/09/21/angular/" data-id="cj34i8xqm000idnsezhhhccg1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular2/">angular2</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2-Zone-js/">Angular2 Zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-设计模式/">Java 设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2-zone-js/">angular2 zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular2-Zone-js/" style="font-size: 10px;">Angular2 Zone.js</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a> <a href="/tags/angular2/" style="font-size: 20px;">angular2</a> <a href="/tags/angular2-zone-js/" style="font-size: 10px;">angular2 zone.js</a> <a href="/tags/css/" style="font-size: 10px;">css</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/19/深入浅出nodejs/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/17/springmvc跨域/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/07/NgValidateTooltip/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/前端开发平台之使用说明/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/Angular DI 总结/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 sanshine<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

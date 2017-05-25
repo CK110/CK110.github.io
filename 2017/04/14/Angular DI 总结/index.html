@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>归档: 2017 | Sanshine</title>
+  <title>Sanshine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Angular DI 总结  层级组件树，默认先查找自己的provider，如果没有声明，向上层查找。只要是最顶层定义过provider，即使子组件中在定义，也不会重新实例化（不会执行构造函数） 生命周期: 自上而下，只要被注入（constructor）一次，就一直存在于内存中，以后的组件使用时，就直接使用，不会再执行service 的构造方法也就是重新实例化 为什么不一定要所有的都在appMod">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Sanshine">
-<meta property="og:url" content="http://CK110.github.io/archives/2017/index.html">
+<meta property="og:url" content="http://CK110.github.io/2017/04/14/Angular DI 总结/index.html">
 <meta property="og:site_name" content="Sanshine">
+<meta property="og:description" content="Angular DI 总结  层级组件树，默认先查找自己的provider，如果没有声明，向上层查找。只要是最顶层定义过provider，即使子组件中在定义，也不会重新实例化（不会执行构造函数） 生命周期: 自上而下，只要被注入（constructor）一次，就一直存在于内存中，以后的组件使用时，就直接使用，不会再执行service 的构造方法也就是重新实例化 为什么不一定要所有的都在appMod">
+<meta property="og:updated_time" content="2017-04-14T09:03:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sanshine">
+<meta name="twitter:description" content="Angular DI 总结  层级组件树，默认先查找自己的provider，如果没有声明，向上层查找。只要是最顶层定义过provider，即使子组件中在定义，也不会重新实例化（不会执行构造函数） 生命周期: 自上而下，只要被注入（constructor）一次，就一直存在于内存中，以后的组件使用时，就直接使用，不会再执行service 的构造方法也就是重新实例化 为什么不一定要所有的都在appMod">
   
     <link rel="alternate" href="/atom.xml" title="Sanshine" type="application/atom+xml">
   
@@ -59,155 +63,67 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/19/深入浅出nodejs/" class="archive-article-date">
-  <time datetime="2017-05-19T06:05:21.000Z" itemprop="datePublished">5月 19</time>
+        <section id="main"><article id="post-Angular DI 总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/Angular DI 总结/" class="article-date">
+  <time datetime="2017-04-14T06:36:04.000Z" itemprop="datePublished">2017-04-14</time>
 </a>
-      
-    </header>
+    
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/17/springmvc跨域/" class="archive-article-date">
-  <time datetime="2017-05-17T09:12:39.000Z" itemprop="datePublished">5月 17</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/07/NgValidateTooltip/" class="archive-article-date">
-  <time datetime="2017-05-07T07:54:49.000Z" itemprop="datePublished">5月 7</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/18/前端开发平台之使用说明/" class="archive-article-date">
-  <time datetime="2017-04-18T05:51:43.000Z" itemprop="datePublished">4月 18</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/14/Angular DI 总结/" class="archive-article-date">
-  <time datetime="2017-04-14T06:36:04.000Z" itemprop="datePublished">4月 14</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/13/需求/" class="archive-article-date">
-  <time datetime="2017-04-13T02:07:43.000Z" itemprop="datePublished">4月 13</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/20/box-shadow的妙用/" class="archive-article-date">
-  <time datetime="2017-03-20T08:21:49.000Z" itemprop="datePublished">3月 20</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/15/vue and angular 类似概念/" class="archive-article-date">
-  <time datetime="2017-03-15T07:11:16.000Z" itemprop="datePublished">3月 15</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/13/JS 数组常用操作/" class="archive-article-date">
-  <time datetime="2017-03-13T06:48:02.000Z" itemprop="datePublished">3月 13</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/12/div实现网易云音乐评论的背景框/" class="archive-article-date">
-  <time datetime="2017-03-12T07:26:34.000Z" itemprop="datePublished">3月 12</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+        <p>Angular DI 总结</p>
+<ol>
+<li>层级组件树，默认先查找自己的provider，如果没有声明，向上层查找。只要是最顶层定义过provider，即使子组件中在定义，也不会重新实例化（不会执行构造函数）</li>
+<li>生命周期: 自上而下，只要被注入（constructor）一次，就一直存在于内存中，以后的组件使用时，就直接使用，不会再执行service 的构造方法也就是重新实例化</li>
+<li>为什么不一定要所有的都在appModule声明？<br> 如果xxService只是为了某个xxComponent而用，万一被其他component使用，当你为了xxComponent修改xxService时，会导致其他组件的bug。</li>
+<li>子组件可以用父组件的provider，父组件不可以用子组件的provider</li>
+</ol>
+<p>疑点:</p>
+<ol>
+<li><p>项目只有AppModule</p>
+</li>
+<li><p>项目还有其他module</p>
+</li>
+</ol>
+<p>2.1 非路由懒加载的module，即需要在</p>
+<p>2.1 非路由懒加载的module</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/04/14/Angular DI 总结/" data-id="cj34i8xpn0000dnse3p09lbky" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/18/前端开发平台之使用说明/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/13/需求/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
 
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="extend next" rel="next" href="/archives/2017/page/2/">__('next') &raquo;</a>
-  </nav>
+  
+</article>
+
 </section>
         
           <aside id="sidebar">

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>angular | Sanshine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="瞎记录">
+<meta name="keywords" content="angular2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular">
+<meta property="og:url" content="http://CK110.github.io/2016/09/21/angular/index.html">
+<meta property="og:site_name" content="Sanshine">
+<meta property="og:description" content="瞎记录">
+<meta property="og:updated_time" content="2016-09-21T13:04:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular">
+<meta name="twitter:description" content="瞎记录">
+  
+    <link rel="alternate" href="/atom.xml" title="Sanshine" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Sanshine</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://CK110.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-angular" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/21/angular/" class="article-date">
+  <time datetime="2016-09-21T12:56:08.000Z" itemprop="datePublished">2016-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angular
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>瞎记录</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="angular2"><a href="#angular2" class="headerlink" title="angular2"></a>angular2</h1><h2 id="1-ElementRef"><a href="#1-ElementRef" class="headerlink" title="1.ElementRef:"></a>1.ElementRef:</h2><p>允许直接访问DOM</p>
+<h2 id="2-ViewContainerRef"><a href="#2-ViewContainerRef" class="headerlink" title="2.ViewContainerRef:"></a>2.ViewContainerRef:</h2><p>Represents a container where one or more Views can be attached.</p>
+<ul>
+<li>代表一个容器,可以附加一个或多个视图。</li>
+</ul>
+<p>The container can contain two kinds of Views. Host Views, created by instantiating a Component via createComponent, and Embedded Views, created by instantiating an Embedded Template via createEmbeddedView.</p>
+<ul>
+<li>容器可以包含两种视图。宿主视图创建的实例化一个组件通过createComponent和嵌入视图,通过createEmbeddedView由嵌入式模板实例化。</li>
+</ul>
+<p>The location of the View Container within the containing View is specified by the Anchor element. Each View Container can have only one Anchor Element and each Anchor Element can only have a single View Container.</p>
+<ul>
+<li>视图容器内包含视图的位置是由锚指定的元素。每个视图容器只能有一个锚元素和每个锚元素只能有单一视图容器。</li>
+</ul>
+<p>Root elements of Views attached to this container become siblings of the Anchor Element in the Rendered View.</p>
+<ul>
+<li>根元素的视图附加到这个容器成为兄弟姐妹的锚元素呈现视图。</li>
+</ul>
+<p>To access a ViewContainerRef of an Element, you can either place a Directive injected with ViewContainerRef on the Element, or you obtain it via a ViewChild query.</p>
+<ul>
+<li>访问ViewContainerRef的一个元素,您可以将指令注入ViewContainerRef元素,或者你得到它通过ViewChild查询。</li>
+</ul>
+<h2 id="3-ChangeDetectionStrategy"><a href="#3-ChangeDetectionStrategy" class="headerlink" title="3.ChangeDetectionStrategy"></a>3.ChangeDetectionStrategy</h2><h3 id="Class-Overview"><a href="#Class-Overview" class="headerlink" title="Class Overview"></a>Class Overview</h3><pre><code>class ChangeDetectionStrategy {
+
+    OnPush 
+
+    Default 
+
+}
+</code></pre><h3 id="Class-Description"><a href="#Class-Description" class="headerlink" title="Class Description"></a>Class Description</h3><p>Describes within the change detector which strategy will be used the next time change detection is triggered.</p>
+<ul>
+<li>描述了在改变探测器将使用哪种策略触发下一次变化检测。</li>
+</ul>
+<h3 id="Class-Export"><a href="#Class-Export" class="headerlink" title="Class Export"></a>Class Export</h3><p>export enum ChangeDetectionStrategy</p>
+<h3 id="Class-Details"><a href="#Class-Details" class="headerlink" title="Class Details"></a>Class Details</h3><p>OnPush</p>
+<p>OnPush means that the change detector’s mode will be set to CheckOnce during hydration.</p>
+<ul>
+<li>OnPush意味着改变探测器的模式将被设置为CheckOnce</li>
+</ul>
+<p>Default</p>
+<p>Default means that the change detector’s mode will be set to CheckAlways during hydration.</p>
+<ul>
+<li>意味着改变探测器的模式将被设置CheckAlways</li>
+</ul>
+<p>##4.OnInit<br>Implement this interface to execute custom initialization logic after your directive’s data-bound properties have been initialized.</p>
+<ul>
+<li>实现这个接口来执行自定义的初始化逻辑指令后的数据绑定属性被初始化。</li>
+</ul>
+<p>ngOnInit is called right after the directive’s data-bound properties have been checked for the first time, and before any of its children have been checked. It is invoked only once when the directive is instantiated.</p>
+<ul>
+<li>ngOnInit 被称为第一次指令的数据绑定属性检查之后,在这之前的children已经检查。它只调用一次指令时实例化。</li>
+</ul>
+<p>##5.ngAfterViewInit<br>Implement this interface to get notified when your component’s view has been fully initialized.</p>
+<ul>
+<li>实现这个接口来得到通知当你已经完全初始化组件的视图。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ngAfterViewInit()&#123;</div><div class="line">    this.elementRef.nativeElement.className = this.setStyleClass();</div><div class="line">    this.elementRef.nativeElement.styles = this.setStyles();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="6-ResolvedReflectiveProvider"><a href="#6-ResolvedReflectiveProvider" class="headerlink" title="6.ResolvedReflectiveProvider"></a>6.ResolvedReflectiveProvider</h2><h2 id="7-ViewEncapsulation"><a href="#7-ViewEncapsulation" class="headerlink" title="7.ViewEncapsulation"></a>7.ViewEncapsulation</h2><p>Defines template and style encapsulation options available for Component’s Component.</p>
+<h1 id="Jquery"><a href="#Jquery" class="headerlink" title="Jquery"></a>Jquery</h1><ol>
+<li><p>$(“.canvas.container”).keypress(function(event){})</p>
+</li>
+<li><p>$(document).on()<br>: on() 方法在被选元素及子元素上添加一个或多个事件处理程序。</p>
+</li>
+<li><p>$().append(): append() 方法在被选元素的结尾（仍然在内部）插入指定内容。</p>
+</li>
+<li><p>$(selector).data(name): data() 方法向被选元素附加数据，或者从被选元素获取数据。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2016/09/21/angular/" data-id="cj34i8xqm000idnsezhhhccg1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular2/">angular2</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/28/angular2App性能调优的4个阶段/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          angular2App性能调优的4个阶段
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/21/angular2-viewEncapsulation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">angular2_viewEncapsulation</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2-Zone-js/">Angular2 Zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-设计模式/">Java 设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2-zone-js/">angular2 zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular2-Zone-js/" style="font-size: 10px;">Angular2 Zone.js</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a> <a href="/tags/angular2/" style="font-size: 20px;">angular2</a> <a href="/tags/angular2-zone-js/" style="font-size: 10px;">angular2 zone.js</a> <a href="/tags/css/" style="font-size: 10px;">css</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/19/深入浅出nodejs/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/17/springmvc跨域/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/07/NgValidateTooltip/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/前端开发平台之使用说明/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/Angular DI 总结/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 sanshine<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

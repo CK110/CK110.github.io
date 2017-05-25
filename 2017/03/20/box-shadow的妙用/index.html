@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sanshine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="box-shadow的妙用 项目中使用的primeng组件，虽然组件很丰富，但是巨丑无比，修改SelectButton 样式时，发现 box-shadow的另一个用法。  先看看primeng的与antdesign的差别PrimeNg的SelectButton:  AntD的: 如何修改 为了实现不会有border重叠，设置每个button都只显示上右下的border:  123.ui-selec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sanshine">
+<meta property="og:url" content="http://CK110.github.io/2017/03/20/box-shadow的妙用/index.html">
+<meta property="og:site_name" content="Sanshine">
+<meta property="og:description" content="box-shadow的妙用 项目中使用的primeng组件，虽然组件很丰富，但是巨丑无比，修改SelectButton 样式时，发现 box-shadow的另一个用法。  先看看primeng的与antdesign的差别PrimeNg的SelectButton:  AntD的: 如何修改 为了实现不会有border重叠，设置每个button都只显示上右下的border:  123.ui-selec">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fdtdutc5g2g30ym0f8410.gif">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1fdtdxsgjmrg30mw0c6aid.gif">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fdte95njapj30dw02gweh.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1fdtehhm0dhj31kw0rktlr.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fdtenps0hwg30v40ec0ue.gif">
+<meta property="og:updated_time" content="2017-03-20T08:55:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sanshine">
+<meta name="twitter:description" content="box-shadow的妙用 项目中使用的primeng组件，虽然组件很丰富，但是巨丑无比，修改SelectButton 样式时，发现 box-shadow的另一个用法。  先看看primeng的与antdesign的差别PrimeNg的SelectButton:  AntD的: 如何修改 为了实现不会有border重叠，设置每个button都只显示上右下的border:  123.ui-selec">
+<meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fdtdutc5g2g30ym0f8410.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Sanshine" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Sanshine</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://CK110.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-box-shadow的妙用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/20/box-shadow的妙用/" class="article-date">
+  <time datetime="2017-03-20T08:21:49.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="box-shadow的妙用"><a href="#box-shadow的妙用" class="headerlink" title="box-shadow的妙用"></a>box-shadow的妙用</h1><blockquote>
+<p>项目中使用的primeng组件，虽然组件很丰富，但是巨丑无比，修改<code>SelectButton</code> 样式时，发现 box-shadow的另一个用法。</p>
+</blockquote>
+<h2 id="先看看primeng的与antdesign的差别"><a href="#先看看primeng的与antdesign的差别" class="headerlink" title="先看看primeng的与antdesign的差别"></a>先看看primeng的与antdesign的差别</h2><p>PrimeNg的<code>SelectButton</code>:</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fdtdutc5g2g30ym0f8410.gif" alt=""></p>
+<p>AntD的:<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fdtdxsgjmrg30mw0c6aid.gif" alt=""></p>
+<h2 id="如何修改"><a href="#如何修改" class="headerlink" title="如何修改"></a>如何修改</h2><ol>
+<li>为了实现不会有border重叠，设置每个button都只显示上右下的<code>border</code>:</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.ui-selectbutton</span> <span class="selector-class">.ui-button</span>&#123;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">0px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果:<img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fdte95njapj30dw02gweh.jpg" alt=""></p>
+<ol>
+<li>第一个button的左border 以及 圆角问题</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="selector-class">.ui-selectbutton</span> <span class="selector-class">.ui-button</span><span class="selector-pseudo">:first-child</span>&#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">4px</span>;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">1px</span> solid <span class="number">#d9d9d9</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.ui-selectbutton</span> <span class="selector-class">.ui-button</span><span class="selector-pseudo">:last-child</span>&#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">4px</span> <span class="number">4px</span> <span class="number">0</span>;</div><div class="line">    <span class="attribute">border-right</span>: <span class="number">1px</span> solid <span class="number">#d9d9d9</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>经过以其他的一些修改，效果这样</li>
+</ol>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgy1fdtehhm0dhj31kw0rktlr.jpg" alt=""></p>
+<p>由于第一步中设置的 <code>boder-left</code> 为0,所以这边缺失了一个<code>boder-left</code>, 现在就是<code>box-shadow</code>发挥作用的地方了</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.ui-selectbutton</span> <span class="selector-class">.ui-button</span><span class="selector-class">.ui-state-active</span>&#123;</div><div class="line">    <span class="attribute">border-color</span>: <span class="number">#57c5f7</span> ;</div><div class="line">    <span class="attribute">box-shadow</span>: -<span class="number">1px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">#57c5f7</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最终效果:<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fdtenps0hwg30v40ec0ue.gif" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>:first-child :last-child 在对于很多类似元素(列表li等)下作用非常大</li>
+<li>利用 <code>box-shadow</code> 来替代 <code>border</code> 的设置 </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/20/box-shadow的妙用/" data-id="cj34i8xqs000pdnsertgixhdu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/13/需求/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/15/vue and angular 类似概念/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2-Zone-js/">Angular2 Zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-设计模式/">Java 设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2-zone-js/">angular2 zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular2-Zone-js/" style="font-size: 10px;">Angular2 Zone.js</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a> <a href="/tags/angular2/" style="font-size: 20px;">angular2</a> <a href="/tags/angular2-zone-js/" style="font-size: 10px;">angular2 zone.js</a> <a href="/tags/css/" style="font-size: 10px;">css</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/19/深入浅出nodejs/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/17/springmvc跨域/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/07/NgValidateTooltip/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/前端开发平台之使用说明/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/Angular DI 总结/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 sanshine<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

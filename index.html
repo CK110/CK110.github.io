@@ -61,38 +61,393 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-深入浅出nodejs" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/25/hello-world/" class="article-date">
-  <time datetime="2017-05-25T12:42:45.000Z" itemprop="datePublished">2017-05-25</time>
+    <a href="/2017/05/19/深入浅出nodejs/" class="article-date">
+  <time datetime="2017-05-19T06:05:21.000Z" itemprop="datePublished">2017-05-19</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/05/25/hello-world/#more">Read More</a>
-          </p>
-        
+        <p>#深入浅出nodejs总结</p>
+<ol>
+<li>异步I/O 与 非阻塞 I/O 的区别<br>2.</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://CK110.github.io/2017/05/25/hello-world/" data-id="cj34f421f0000l9sev13qgb68" class="article-share-link">Share</a>
+      <a data-url="http://CK110.github.io/2017/05/19/深入浅出nodejs/" data-id="cj34i8xr70011dnsexxtdqx9u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-springmvc跨域" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/17/springmvc跨域/" class="article-date">
+  <time datetime="2017-05-17T09:12:39.000Z" itemprop="datePublished">2017-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#SpringMVC项目支持CORS的几种方式</p>
+<p>Spring Framework 4.2 GA为开箱即用的CORS提供了一流的支持，为您提供了比典型的基于过滤器的解决方案更简单，更强大的配置方式。</p>
+<h2 id="Controller方法上增加CORS配置"><a href="#Controller方法上增加CORS配置" class="headerlink" title="Controller方法上增加CORS配置"></a>Controller方法上增加CORS配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/account"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountController</span> </span>&#123;</div><div class="line"></div><div class="line">	+ <span class="meta">@CrossOrigin</span></div><div class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Account <span class="title">retrieve</span><span class="params">(@PathVariable Long id)</span> </span>&#123;</div><div class="line">		<span class="comment">// ...</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@RequestMapping</span>(method = RequestMethod.DELETE, value = <span class="string">"/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(@PathVariable Long id)</span> </span>&#123;</div><div class="line">		<span class="comment">// ...</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在controller上配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">+ <span class="meta">@CrossOrigin</span>(origins = <span class="string">"http://domain2.com"</span>, maxAge = <span class="number">3600</span>)</div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/account"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountController</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Account <span class="title">retrieve</span><span class="params">(@PathVariable Long id)</span> </span>&#123;</div><div class="line">		<span class="comment">// ...</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@RequestMapping</span>(method = RequestMethod.DELETE, value = <span class="string">"/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(@PathVariable Long id)</span> </span>&#123;</div><div class="line">		<span class="comment">// ...</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>或者混合配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">+ @CrossOrigin(maxAge = 3600)</div><div class="line">@RestController</div><div class="line">@RequestMapping(&quot;/account&quot;)</div><div class="line">public class AccountController &#123;</div><div class="line"></div><div class="line">	+ @CrossOrigin(origins = &quot;http://domain2.com&quot;)</div><div class="line">	@RequestMapping(&quot;/&#123;id&#125;&quot;)</div><div class="line">	public Account retrieve(@PathVariable Long id) &#123;</div><div class="line">		// ...</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@RequestMapping(method = RequestMethod.DELETE, value = &quot;/&#123;id&#125;&quot;)</div><div class="line">	public void remove(@PathVariable Long id) &#123;</div><div class="line">		// ...</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><h3 id="使用Java配置"><a href="#使用Java配置" class="headerlink" title="使用Java配置"></a>使用Java配置</h3><p>整个应用都支持CORS</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">		registry.addMapping(<span class="string">"/**"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>更详细的配置，具体到某个API路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">		registry.addMapping(<span class="string">"/api/**"</span>)</div><div class="line">			.allowedOrigins(<span class="string">"http://domain2.com"</span>)</div><div class="line">			.allowedMethods(<span class="string">"PUT"</span>, <span class="string">"DELETE"</span>)</div><div class="line">			.allowedHeaders(<span class="string">"header1"</span>, <span class="string">"header2"</span>, <span class="string">"header3"</span>)</div><div class="line">			.exposedHeaders(<span class="string">"header1"</span>, <span class="string">"header2"</span>)</div><div class="line">			.allowCredentials(<span class="keyword">false</span>).maxAge(<span class="number">3600</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="使用XML配置"><a href="#使用XML配置" class="headerlink" title="使用XML配置"></a>使用XML配置</h3><p>整个应用都支持CORS</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mvc:cors</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/**"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mvc:cors</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>更详细的配置，具体到某个API路径</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mvc:cors</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/api/**"</span></span></div><div class="line">		<span class="attr">allowed-origins</span>=<span class="string">"http://domain1.com, http://domain2.com"</span></div><div class="line">		<span class="attr">allowed-methods</span>=<span class="string">"GET, PUT"</span></div><div class="line">		<span class="attr">allowed-headers</span>=<span class="string">"header1, header2, header3"</span></div><div class="line">		<span class="attr">exposed-headers</span>=<span class="string">"header1, header2"</span> <span class="attr">allow-credentials</span>=<span class="string">"false"</span></div><div class="line">		<span class="attr">max-age</span>=<span class="string">"123"</span> /&gt;</div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/resources/**"</span></span></div><div class="line">		<span class="attr">allowed-origins</span>=<span class="string">"http://domain1.com"</span> /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">mvc:cors</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>##Spring Boot的配置方式<br>Spring Boot 1.3 版本支持CORS</p>
+<p>在SpringBoot应用程序中使用带有@CrossOrigin注解的 controller方法，不需要任何特定的配置。</p>
+<h3 id="全局配置的方式"><a href="#全局配置的方式" class="headerlink" title="全局配置的方式:"></a>全局配置的方式:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> WebMvcConfigurer <span class="title">corsConfigurer</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WebMvcConfigurerAdapter() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">                registry.addMapping(<span class="string">"/api/**"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Filter-based-CORS-support"><a href="#Filter-based-CORS-support" class="headerlink" title="Filter based CORS support"></a>Filter based CORS support</h3><p>为了支持具有基于过滤器的安全框架（如Spring Security）的CORS，或者与其他不支持本机CORS的项目（如Spring Data REST）一起，我们还提供了一个CorsFilter。在这种情况下，不用使用@CrossOrigin或WebMvcConfigurer＃addCorsMappings（CorsRegistry），您可以在Spring Boot应用程序中声明如下所示的过滤器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Bean</span></div><div class="line">	<span class="function"><span class="keyword">public</span> FilterRegistrationBean <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;</div><div class="line">		UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</div><div class="line">		CorsConfiguration config = <span class="keyword">new</span> CorsConfiguration();</div><div class="line">		config.setAllowCredentials(<span class="keyword">true</span>);</div><div class="line">		config.addAllowedOrigin(<span class="string">"http://domain1.com"</span>);</div><div class="line">		config.addAllowedHeader(<span class="string">"*"</span>);</div><div class="line">		config.addAllowedMethod(<span class="string">"*"</span>);</div><div class="line">		source.registerCorsConfiguration(<span class="string">"/**"</span>, config);</div><div class="line">		FilterRegistrationBean bean = <span class="keyword">new</span> FilterRegistrationBean(<span class="keyword">new</span> CorsFilter(source));</div><div class="line">		bean.setOrder(<span class="number">0</span>);</div><div class="line">		<span class="keyword">return</span> bean;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://spring.io/blog/2015/06/08/cors-support-in-spring-framework" target="_blank" rel="external">CORS support in Spring Framework</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/05/17/springmvc跨域/" data-id="cj34i8xqv000tdnsewlk5c3k6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-NgValidateTooltip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/07/NgValidateTooltip/" class="article-date">
+  <time datetime="2017-05-07T07:54:49.000Z" itemprop="datePublished">2017-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="NgValidateTooltip"><a href="#NgValidateTooltip" class="headerlink" title="NgValidateTooltip"></a>NgValidateTooltip</h1><p>a validate tooltip built with Angular4 inspired by <a href="https://github.com/primefaces/primeng/blob/master/components/tooltip/tooltip.ts" target="_blank" rel="external">PrimeNG</a></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>npm i ngx-validate-tooltip –save</p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="Import-In-AppModule"><a href="#Import-In-AppModule" class="headerlink" title="Import In AppModule"></a>Import In AppModule</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">....</div><div class="line">+ <span class="keyword">import</span> &#123;ValidateMsgService, ValidateTooltipModule&#125; <span class="keyword">from</span> <span class="string">'ngx-validate-tooltip'</span>;</div><div class="line"></div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  declarations: [</div><div class="line">    AppComponent</div><div class="line">  ],</div><div class="line">  imports: [</div><div class="line">    BrowserModule,</div><div class="line">    FormsModule,</div><div class="line">    HttpModule,</div><div class="line">+    ValidateTooltipModule,</div><div class="line">  ],</div><div class="line">  providers: [</div><div class="line">+    ValidateMsgService</div><div class="line">    <span class="comment">// &#123; provide: ValidateMsgService, useClass: CustomValidateMsgService &#125;</span></div><div class="line">  ],</div><div class="line">  bootstrap: [AppComponent]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</div></pre></td></tr></table></figure>
+<h3 id="Use-In-Templete"><a href="#Use-In-Templete" class="headerlink" title="Use In Templete"></a>Use In Templete</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// app.component.html</div><div class="line">&lt;form [formGroup]=&quot;ngForm&quot; &gt;</div><div class="line">  &lt;app-validate-tooltip [control]=&quot;ngForm.get(&apos;start&apos;)&quot;&gt;</div><div class="line">    &lt;input pInputText formControlName=&quot;start&quot;&gt;</div><div class="line">  &lt;/app-validate-tooltip&gt;</div><div class="line"></div><div class="line">  &lt;app-validate-tooltip [control]=&quot;ngForm.get(&apos;end&apos;)&quot;&gt;</div><div class="line">    &lt;input pInputText formControlName=&quot;end&quot;&gt;</div><div class="line">  &lt;/app-validate-tooltip&gt;</div><div class="line"></div><div class="line">  &lt;app-validate-tooltip [control]=&quot;ngForm.get(&apos;city&apos;)&quot;&gt;</div><div class="line">    &lt;input pInputText formControlName=&quot;city&quot;&gt;</div><div class="line">  &lt;/app-validate-tooltip&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// app.component.ts</div><div class="line">export class AppComponent implements OnInit&#123;</div><div class="line"></div><div class="line">  ngForm: FormGroup;</div><div class="line"></div><div class="line">  constructor(private fb: FormBuilder) &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  ngOnInit() &#123;</div><div class="line">    this.ngForm = this.fb.group(&#123;</div><div class="line">      start: [&apos;&apos;, [Validators.required, Validators.minLength(4)]],</div><div class="line">      end: [&apos;&apos;, [Validators.required, Validators.minLength(4)]],</div><div class="line">      city: [&apos;&apos;, []],</div><div class="line">      address: [&apos;&apos;, [Validators.required, Validators.minLength(4)]],</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Custom-Your-Own-ValidateMsg"><a href="#Custom-Your-Own-ValidateMsg" class="headerlink" title="Custom Your Own ValidateMsg"></a>Custom Your Own ValidateMsg</h3><p>like <a href="">this</a> And You should import in AppModule.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  providers: [</div><div class="line">    //ValidateMsgService</div><div class="line">+     &#123; provide: ValidateMsgService, useClass: CustomValidateMsgService &#125;</div><div class="line">  ],</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/05/07/NgValidateTooltip/" data-id="cj34i8xq40006dnsexdes1uyv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端开发平台之使用说明" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/18/前端开发平台之使用说明/" class="article-date">
+  <time datetime="2017-04-18T05:51:43.000Z" itemprop="datePublished">2017-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前端开发平台之使用说明"><a href="#前端开发平台之使用说明" class="headerlink" title="前端开发平台之使用说明"></a>前端开发平台之使用说明</h1><h1 id="前置技能"><a href="#前置技能" class="headerlink" title="前置技能"></a>前置技能</h1><p>既然是一个前端开发平台，html，javascript/typescript，css 的基础只是还是需要的。</p>
+<p>高级: 如果了解angular 和 rxjs 则会更好</p>
+<h1 id="文档说明"><a href="#文档说明" class="headerlink" title="文档说明"></a>文档说明</h1><p>按照这个快速上手，过一遍。。。</p>
+<h1 id="界面说明"><a href="#界面说明" class="headerlink" title="界面说明"></a>界面说明</h1><p>##ui/可视化的html</p>
+<ol>
+<li>Uibook 是集成的一个操作/组件说明文档</li>
+<li>项目视图，Project Explorer中使用svn(对于那些懒得切换视图的人可能就是一个问题)</li>
+<li>实际UI操作界面，这边需要说明一下怎么设置属性，怎么查看dom结构，怎么编译，怎么预览。</li>
+</ol>
+<p>##ts/js<br>需要知道的知识:</p>
+<ol>
+<li>@NgModule 与 @Component</li>
+<li>@ViewChild, 选择器类似 document.getElementById(‘’)</li>
+<li>http 服务的使用，决定是否要基于angular的http封装一层来更友好的支持restFul以及jwt</li>
+<li>路由配置(是否需要lazyload)</li>
+</ol>
+<p>##css<br>在ui平台是使用css有3种方式:</p>
+<ol>
+<li>在设计页面，基于某个组件设置样式，相当于在直接在html中写行内样式，耦合度较高</li>
+<li>全局引用，作用于整个application</li>
+<li>angular 组件模板引用的方式，默认只作用于局部</li>
+</ol>
+<h1 id="项目发布"><a href="#项目发布" class="headerlink" title="项目发布"></a>项目发布</h1><h2 id="目前"><a href="#目前" class="headerlink" title="目前"></a>目前</h2><p>目前是JIT的形式，</p>
+<p>类似于hr，只不过新一代hr使用iframe的方式加载html，<br>这边是使用angular路由加载js，需要在浏览器中编译Angular语法</p>
+<p>SystemJS作为模块加载器</p>
+<h2 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h2><p>AOT</p>
+<p>Webpack</p>
+<h1 id="web-oa设计"><a href="#web-oa设计" class="headerlink" title="web-oa设计"></a>web-oa设计</h1><ol>
+<li>spa</li>
+<li>路由设计</li>
+<li>组件通信(弹框引起的)</li>
+</ol>
+<p>问题: </p>
+<ol>
+<li>lazyload？自定义组件还是使用路由</li>
+<li>弹框对于Angular路由的影响，如何进行父子通信？</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/04/18/前端开发平台之使用说明/" data-id="cj34i8xr0000wdnsep0ld5vvj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Angular DI 总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/Angular DI 总结/" class="article-date">
+  <time datetime="2017-04-14T06:36:04.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Angular DI 总结</p>
+<ol>
+<li>层级组件树，默认先查找自己的provider，如果没有声明，向上层查找。只要是最顶层定义过provider，即使子组件中在定义，也不会重新实例化（不会执行构造函数）</li>
+<li>生命周期: 自上而下，只要被注入（constructor）一次，就一直存在于内存中，以后的组件使用时，就直接使用，不会再执行service 的构造方法也就是重新实例化</li>
+<li>为什么不一定要所有的都在appModule声明？<br> 如果xxService只是为了某个xxComponent而用，万一被其他component使用，当你为了xxComponent修改xxService时，会导致其他组件的bug。</li>
+<li>子组件可以用父组件的provider，父组件不可以用子组件的provider</li>
+</ol>
+<p>疑点:</p>
+<ol>
+<li><p>项目只有AppModule</p>
+</li>
+<li><p>项目还有其他module</p>
+</li>
+</ol>
+<p>2.1 非路由懒加载的module，即需要在</p>
+<p>2.1 非路由懒加载的module</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/04/14/Angular DI 总结/" data-id="cj34i8xpn0000dnse3p09lbky" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-需求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/13/需求/" class="article-date">
+  <time datetime="2017-04-13T02:07:43.000Z" itemprop="datePublished">2017-04-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在不确定父组件的情况下，子组件怎么调用父组件的方法</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgy1fek1f6kay2j311a0uowgh.jpg" alt=""></p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
+<li>pageB 是 pageA1，pageA2 的子路由所对应的组件，内容是一个表单</li>
+<li>pageA1，pageA2 是一个包含弹框dialog，dialog里面是route-outlet。点击页面的按钮，弹框弹出，弹框里面的内容是pageB</li>
+<li>假设 pageB表单提交， 我需要关闭dialog，并且pageA1，pageA2 里面的表格数据要刷新</li>
+</ol>
+<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><p>一开始解决这种问题，是在pageB通过<code>@Inject(forwardRef(() =&gt; pageA1)) private _parent: pageA1</code>获取父组件实例，然后调用里面的方法关闭窗口，并且重新请求表格数据。</p>
+<p>这样处理会有一个问题，就是pageB必须要确定其父组件的类型，是pageA1还是pageA2</p>
+<p>有没有什么方法能解决这个问题？引入ngrx可以解决这个问题吗</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/04/13/需求/" data-id="cj34i8xr60010dnseyfx6ocfh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-box-shadow的妙用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/20/box-shadow的妙用/" class="article-date">
+  <time datetime="2017-03-20T08:21:49.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="box-shadow的妙用"><a href="#box-shadow的妙用" class="headerlink" title="box-shadow的妙用"></a>box-shadow的妙用</h1><blockquote>
+<p>项目中使用的primeng组件，虽然组件很丰富，但是巨丑无比，修改<code>SelectButton</code> 样式时，发现 box-shadow的另一个用法。</p>
+</blockquote>
+<h2 id="先看看primeng的与antdesign的差别"><a href="#先看看primeng的与antdesign的差别" class="headerlink" title="先看看primeng的与antdesign的差别"></a>先看看primeng的与antdesign的差别</h2><p>PrimeNg的<code>SelectButton</code>:</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fdtdutc5g2g30ym0f8410.gif" alt=""></p>
+<p>AntD的:<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fdtdxsgjmrg30mw0c6aid.gif" alt=""></p>
+<h2 id="如何修改"><a href="#如何修改" class="headerlink" title="如何修改"></a>如何修改</h2><ol>
+<li>为了实现不会有border重叠，设置每个button都只显示上右下的<code>border</code>:</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.ui-selectbutton</span> <span class="selector-class">.ui-button</span>&#123;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">0px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果:<img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fdte95njapj30dw02gweh.jpg" alt=""></p>
+<ol>
+<li>第一个button的左border 以及 圆角问题</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="selector-class">.ui-selectbutton</span> <span class="selector-class">.ui-button</span><span class="selector-pseudo">:first-child</span>&#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">4px</span>;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">1px</span> solid <span class="number">#d9d9d9</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.ui-selectbutton</span> <span class="selector-class">.ui-button</span><span class="selector-pseudo">:last-child</span>&#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">4px</span> <span class="number">4px</span> <span class="number">0</span>;</div><div class="line">    <span class="attribute">border-right</span>: <span class="number">1px</span> solid <span class="number">#d9d9d9</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>经过以其他的一些修改，效果这样</li>
+</ol>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgy1fdtehhm0dhj31kw0rktlr.jpg" alt=""></p>
+<p>由于第一步中设置的 <code>boder-left</code> 为0,所以这边缺失了一个<code>boder-left</code>, 现在就是<code>box-shadow</code>发挥作用的地方了</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.ui-selectbutton</span> <span class="selector-class">.ui-button</span><span class="selector-class">.ui-state-active</span>&#123;</div><div class="line">    <span class="attribute">border-color</span>: <span class="number">#57c5f7</span> ;</div><div class="line">    <span class="attribute">box-shadow</span>: -<span class="number">1px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">#57c5f7</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最终效果:<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fdtenps0hwg30v40ec0ue.gif" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>:first-child :last-child 在对于很多类似元素(列表li等)下作用非常大</li>
+<li>利用 <code>box-shadow</code> 来替代 <code>border</code> 的设置 </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/20/box-shadow的妙用/" data-id="cj34i8xqs000pdnsertgixhdu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue and angular 类似概念" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/15/vue and angular 类似概念/" class="article-date">
+  <time datetime="2017-03-15T07:11:16.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="vue-and-angular-类似概念"><a href="#vue-and-angular-类似概念" class="headerlink" title="vue and angular 类似概念"></a>vue and angular 类似概念</h1><h2 id="slot-和-ng-content"><a href="#slot-和-ng-content" class="headerlink" title="slot 和 ng-content"></a>slot 和 ng-content</h2><p>分发内容，简单理解是一个插槽。父组件标签内的其他东西，<code>&lt;comp&gt; 其他东西 &lt;/comp&gt;</code>, 是否在编译后最终保留下来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vue: &lt;slot&gt;&lt;/slot&gt;</div><div class="line"></div><div class="line">angular:&lt;ng-content&gt;&lt;/ng-content&gt;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/15/vue and angular 类似概念/" data-id="cj34i8xqy000vdnse5nv3mqja" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS 数组常用操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/13/JS 数组常用操作/" class="article-date">
+  <time datetime="2017-03-13T06:48:02.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JS-数组常用操作"><a href="#JS-数组常用操作" class="headerlink" title="JS 数组常用操作"></a>JS 数组常用操作</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/13/JS 数组常用操作/" data-id="cj34i8xps0002dnser542o86a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-div实现网易云音乐评论的背景框" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/div实现网易云音乐评论的背景框/" class="article-date">
+  <time datetime="2017-03-12T07:26:34.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="div实现网易云音乐评论的背景框"><a href="#div实现网易云音乐评论的背景框" class="headerlink" title="div实现网易云音乐评论的背景框"></a>div实现网易云音乐评论的背景框</h1><blockquote>
+<p>看到网易云音乐网页版的评论系统，它是用2个图标折叠显示出这种效果的</p>
+</blockquote>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1fdk2u8so26j312k09cmyl.jpg" alt=""></p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ul>
+<li>三角的实现，使用<code>div</code>设置 <code>border</code> 的方式创建三角形。 用2个三角形的覆盖，最外层的三角形颜色和文字框背景一样，确保只显示三角的边</li>
+<li>主要用到<code>div</code>的绝对定位，但是要确保是要相对于某个<code>div</code>的绝对定位，所以最外层 <code>&lt;div class=&quot;wap&quot;&gt;</code> 设置为 <code>position: relative;</code></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wap"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span></div><div class="line">    内容内容内容</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"arrow"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sarrow"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wap</span>&#123;     </div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">  <span class="attribute">width</span>:<span class="number">300px</span>    // 最外层控制长宽</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.main</span>&#123;</div><div class="line">  <span class="attribute">display</span>:block;</div><div class="line">  <span class="attribute">border</span>:<span class="number">1px</span> solid red;</div><div class="line">  <span class="attribute">position</span>:relative;</div><div class="line">  <span class="attribute">padding</span>:<span class="number">10px</span>;</div><div class="line">  <span class="attribute">background-color</span>:<span class="number">#fff</span>;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.arrow</span>&#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">border-top</span>: <span class="number">5px</span> solid transparent;</div><div class="line">  <span class="attribute">border-right</span>: <span class="number">5px</span> solid red;</div><div class="line">  <span class="attribute">border-bottom</span>: <span class="number">5px</span> solid transparent;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">top</span>:<span class="number">7px</span>;</div><div class="line">  <span class="attribute">left</span>:-<span class="number">4.5px</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.sarrow</span>&#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">border-top</span>: <span class="number">4.5px</span> solid transparent;</div><div class="line">  <span class="attribute">border-right</span>: <span class="number">4.5px</span> solid <span class="number">#fff</span>;</div><div class="line">  <span class="attribute">border-bottom</span>: <span class="number">4.5px</span> solid transparent;</div><div class="line">  <span class="attribute">position</span>:absolute;</div><div class="line">  <span class="attribute">top</span>:<span class="number">8px</span>;</div><div class="line">  <span class="attribute">left</span>:-<span class="number">3.5px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="http://jsbin.com/digekot/19/edit?html,css,output" target="_blank" rel="external">在线查看效果</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/03/12/div实现网易云音乐评论的背景框/" data-id="cj34i8xqu000sdnsewxxpjyp9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -103,23 +458,48 @@
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2-Zone-js/">Angular2 Zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-设计模式/">Java 设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2-zone-js/">angular2 zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular2-Zone-js/" style="font-size: 10px;">Angular2 Zone.js</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a> <a href="/tags/angular2/" style="font-size: 20px;">angular2</a> <a href="/tags/angular2-zone-js/" style="font-size: 10px;">angular2 zone.js</a> <a href="/tags/css/" style="font-size: 10px;">css</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
     </div>
   </div>
 
@@ -132,7 +512,23 @@
       <ul>
         
           <li>
-            <a href="/2017/05/25/hello-world/">Hello World</a>
+            <a href="/2017/05/19/深入浅出nodejs/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/17/springmvc跨域/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/07/NgValidateTooltip/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/前端开发平台之使用说明/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/Angular DI 总结/">(no title)</a>
           </li>
         
       </ul>

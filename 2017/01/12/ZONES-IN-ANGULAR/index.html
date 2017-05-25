@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ZONES IN ANGULAR | Sanshine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="除非特别说明，文章内容的Angular版本 &amp;gt;=2.x 此为翻译文章，查看原文">
+<meta name="keywords" content="angular2 zone.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZONES IN ANGULAR">
+<meta property="og:url" content="http://CK110.github.io/2017/01/12/ZONES-IN-ANGULAR/index.html">
+<meta property="og:site_name" content="Sanshine">
+<meta property="og:description" content="除非特别说明，文章内容的Angular版本 &amp;gt;=2.x 此为翻译文章，查看原文">
+<meta property="og:updated_time" content="2017-01-12T07:22:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZONES IN ANGULAR">
+<meta name="twitter:description" content="除非特别说明，文章内容的Angular版本 &amp;gt;=2.x 此为翻译文章，查看原文">
+  
+    <link rel="alternate" href="/atom.xml" title="Sanshine" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Sanshine</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://CK110.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ZONES-IN-ANGULAR" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/12/ZONES-IN-ANGULAR/" class="article-date">
+  <time datetime="2017-01-12T06:09:51.000Z" itemprop="datePublished">2017-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ZONES IN ANGULAR
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p> 除非特别说明，文章内容的Angular版本 &gt;=2.x<br> 此为翻译文章，查看<a href="http://blog.thoughtram.io/angular/2016/02/01/zones-in-angular-2.html#running-code-outside-angulars-zone" target="_blank" rel="external">原文</a></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Zones-完美适合Angular"><a href="#Zones-完美适合Angular" class="headerlink" title="Zones 完美适合Angular"></a>Zones 完美适合Angular</h2><p>事实证明，Zones目前解决的问题，非常适合用在Angular的变化检测机制（脏检测）中。首先，让我们了解下什么导致了我们应用的状态的改变：</p>
+<ul>
+<li>Event - 用户交互事件，比如 click，change，input，submit，…</li>
+<li>XMLHttpRequests - 比如说，从远程服务中获取数据</li>
+<li>Timers - setTimeout( )，setInterval（），JavaScript中的这些定时器</li>
+</ul>
+<p>这三种导致状态变化的行为，都是异步（asynchronous）的。</p>
+<p>事实证明，这三种方式和Angular 中更新视图有很大关系。让我们先看看在一个Angular组件中，点击一个按钮后，会做什么处理：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@Component(&#123;</div><div class="line">  <span class="attr">selector</span>: <span class="string">'my-component'</span>,</div><div class="line">  <span class="attr">template</span>: <span class="string">`</span></div><div class="line">    &lt;h3&gt;We love &#123;&#123;name&#125;&#125;&lt;/h3&gt;</div><div class="line">    &lt;button (click)="changeName()"&gt;Change name&lt;/button&gt;</div><div class="line">  `</div><div class="line">&#125;)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> </span>&#123;</div><div class="line"></div><div class="line">  name:string = <span class="string">'thoughtram'</span>;</div><div class="line"></div><div class="line">  changeName() &#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'Angular'</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码的主题意思是在<figure class="highlight plain"><figcaption><span>元素上绑定了一个```click``` 事件。但点击按钮后，```changeName()``` 被执行，接着该组件的```name```属性值被改变。 因为我们想把这种变化反应到DOM 中，Angualar 会相应的更新视图中绑定的```&#123;&#123;name&#125;&#125;```值，然后渲染到DOME 中，最终完成视图的变化。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">还有一种方式，使用```setTimeout()``` 来更新```name```的属性值。如下：</div><div class="line">```javascript</div><div class="line">@Component(&#123;</div><div class="line">  selector: &apos;my-component&apos;,</div><div class="line">  template: `</div><div class="line">    &lt;h3&gt;We love &#123;&#123;name&#125;&#125;&lt;/h3&gt;</div><div class="line">  `</div><div class="line">&#125;)</div><div class="line">class MyComponent implements OnInit &#123;</div><div class="line"></div><div class="line">  name:string = &apos;thoughtram&apos;;</div><div class="line"></div><div class="line">  ngOnInit() &#123;</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      this.name = &apos;Angular&apos;;</div><div class="line">    &#125;, 1000);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们不需要特意告诉Angular框架发生了一个变化。不用像angular1.x 中那样，不需要 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">如果你读过这边文章[understanding Zones](https://blog.thoughtram.io/angular/2016/01/22/understanding-zones.html)。这其实是Angular 使用了Zones。	Zones monkey-patches（不知如何翻译）了全局的异步操作，比如：```setTimeout()```和```addEventListerner()```,这些可以让Angular 快速的发现什么时候要更新DOM。</div><div class="line"></div><div class="line">事实上，在VM中运行时，上面那些代码（ click，setTimeout（））会告诉Angular去运行变化检测，如下面：</div><div class="line">```javascript</div><div class="line">ObservableWrapper.subscribe(this.zone.onTurnDone, () =&gt; &#123;</div><div class="line">  this.zone.run(() =&gt; &#123;</div><div class="line">    this.tick();</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">tick() &#123;</div><div class="line">  // perform change detection</div><div class="line">  this.changeDetectorRefs.forEach((detector) =&gt; &#123;</div><div class="line">    detector.detectChanges();</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>无论何时，当 Angualr的zone emits（发射出）一个<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```onTurnDone``` 并不是zone的默认API，它是Angular自己的zone拓展的API</div><div class="line"></div><div class="line">## NgZone in Angular</div><div class="line">```NgZone``` 是从zones中forked而来，它拓展了API，并且加入了一些额外的设计。其中一个设计就是就是增加了下面这些可以订阅（subscribe）的自定义事件，它们都是observable streams:</div><div class="line"></div><div class="line">- onTurnStart() - Notifies subscribers just before Angular’s event turn starts. Emits an event once per browser task that is handled by Angular.</div><div class="line">- onTurnDone() - Notifies subscribers immediately after Angular’s zone is done processing the current turn and any micro tasks scheduled from that turn.</div><div class="line">- onEventDone() - Notifies subscribers immediately after the final onTurnDone() callback before ending VM event. Useful for testing to validate application state.</div><div class="line"></div><div class="line">Angular添加自己的事件发射器,而不是依靠默认的```beforeTask``` ```afterTask```回调, 是因为需要跟踪定时器和其他微任务。这些Observable被当做API使用，可以很好的处理那些事件。</div><div class="line"></div><div class="line">## Running code outside Angular’s zone</div><div class="line">由于```NgZone```只是一个全局zone的fork，Angular完全控制当运行在其zone的代码而进行变化检测，但是，我们并不是所有情况下都想要这种作用。</div><div class="line"></div><div class="line">之前提到过，Zones基本给浏览器的所有异步操作都monkey-patches 。因为```NgZone``` 也是一个fork，所以只要是异步操作，都会提醒框架去进行脏检测。比如说 事件```mousemove``` 就会触发一个脏检测事件。</div><div class="line"></div><div class="line">我们可能不希望每次```mousemove``` 都进行脏检测，这会降低我们应用响应速度，造成不好的用户体验。</div><div class="line"></div><div class="line">这就是为什么要有API ```runOutsideAngular()``` 。在这个API中运行的代码会运行task 在```NgZone```的父zone，它不会emit（发射）会一个```onTurnDone```事件，不会引起脏检测。这是一个非常有用的功能，看下面代码：</div><div class="line">```javascript</div><div class="line">@Component(&#123;</div><div class="line">  selector: &apos;progress-bar&apos;,</div><div class="line">  template: `</div><div class="line">    &lt;h3&gt;Progress: &#123;&#123;progress&#125;&#125;&lt;/h3&gt;</div><div class="line">    &lt;button (click)=&quot;processWithinAngularZone()&quot;&gt;</div><div class="line">      Process within Angular zone</div><div class="line">    &lt;/button&gt;</div><div class="line">  `</div><div class="line">&#125;)</div><div class="line">class ProgressBar &#123;</div><div class="line"></div><div class="line">  progress: number = 0;</div><div class="line"></div><div class="line">  constructor(private zone: NgZone) &#123;&#125;</div><div class="line"></div><div class="line">  processWithinAngularZone() &#123;</div><div class="line">    this.progress = 0;</div><div class="line">    this.increaseProgress(() =&gt; console.log(&apos;Done!&apos;));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  processOutsideAngularZone() &#123;</div><div class="line">	 this.progress = 0;</div><div class="line">	 this.zone.runOutsideAngular(() =&gt; &#123;</div><div class="line">	   this.increaseProgress(() =&gt; &#123;</div><div class="line">	     this.zone.run(() =&gt; &#123;</div><div class="line">	       console.log(&apos;Outside Done!&apos;);</div><div class="line">	     &#125;);</div><div class="line">	   &#125;);</div><div class="line">	 &#125;);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">  increaseProgress(doneCallback: () =&gt; void) &#123;</div><div class="line"></div><div class="line">	//异步task</div><div class="line">	//如果在NgZone内部运行会返回onTurnDone，从而触发脏检测</div><div class="line">	//在外部运行不会触发脏检测</div><div class="line">	window.setTimeout(() =&gt; &#123;</div><div class="line">	  this.progress += 1;</div><div class="line">	  console.log(`Current progress: $&#123;this.progress&#125;%`);</div><div class="line"></div><div class="line">	  if (this.progress &lt; 100) &#123;</div><div class="line">	    window.setTimeout(() =&gt; &#123;</div><div class="line">	      this.increaseProgress(doneCallback);</div><div class="line">	    &#125;, 10);</div><div class="line">	  &#125; else &#123;</div><div class="line">	    doneCallback();</div><div class="line">	  &#125;</div><div class="line">	&#125;,2&#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://CK110.github.io/2017/01/12/ZONES-IN-ANGULAR/" data-id="cj34i8xql000hdnseopvbs1uy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular2-zone-js/">angular2 zone.js</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/24/viewEncapsulation in angular2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/11/ElementRef/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ElementRef</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2-Zone-js/">Angular2 Zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-设计模式/">Java 设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2-zone-js/">angular2 zone.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular2-Zone-js/" style="font-size: 10px;">Angular2 Zone.js</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a> <a href="/tags/angular2/" style="font-size: 20px;">angular2</a> <a href="/tags/angular2-zone-js/" style="font-size: 10px;">angular2 zone.js</a> <a href="/tags/css/" style="font-size: 10px;">css</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/19/深入浅出nodejs/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/17/springmvc跨域/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/07/NgValidateTooltip/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/前端开发平台之使用说明/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/Angular DI 总结/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 sanshine<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
